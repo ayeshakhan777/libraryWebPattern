@@ -19,7 +19,7 @@ public class User {
     private String addressLine1;
     private String addressLine2;
     private int isAdmin;
-
+    
     public User(int userID, String email, String password, String firstName, String lastName, String country, String addressLine1, String addressLine2, int isAdmin) {
         this.userID = userID;
         this.email = email;
@@ -43,6 +43,9 @@ public class User {
         this.isAdmin = isAdmin;
     }
     
+    
+    
+    
     public User() {
         
     }
@@ -50,10 +53,11 @@ public class User {
     public int getUserID() {
         return userID;
     }
-    
+
     public void setUserID(int userID) {
         this.userID = userID;
     }
+    
     
     public String getEmail() {
         return email;

@@ -30,7 +30,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
         try {
             con = getConnection();
-            String query = "SELECT * FROM users WHERE firstName = ? OR lastName = ?";
+            String query = "SELECT * FROM users WHERE firstName = ? AND lastName = ?";
             ps = con.prepareStatement(query);
 
             ps.setString(1, firstName);
@@ -191,10 +191,8 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
         try {
             con = getConnection();
-            String query = "INSERT INTO users VALUES(?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO users VALUES(NULL,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(query);
-
-            int userID = user.getUserID();
             String email = user.getEmail();
             String password = user.getPassword();
             String firstName = user.getFirstName();
@@ -205,15 +203,14 @@ public class UserDAO extends DAO implements UserDAOInterface {
             int isAdmin = user.getIsAdmin();
 
             // Fill in the blanks, i.e. parameterize the query
-            ps.setInt(1, userID);
-            ps.setString(2, email);
-            ps.setString(3, password);
-            ps.setString(4, firstName);
-            ps.setString(5, lastName);
-            ps.setString(6, country);
-            ps.setString(7, addressLine1);
-            ps.setString(8, addressLine2);
-            ps.setInt(9, isAdmin);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.setString(3, firstName);
+            ps.setString(4, lastName);
+            ps.setString(5, country);
+            ps.setString(6, addressLine1);
+            ps.setString(7, addressLine2);
+            ps.setInt(8, isAdmin);
 
             // Execute the query
             rs = ps.executeUpdate();

@@ -21,6 +21,10 @@ public class Borrowed {
         this.daysBorrowed = daysBorrowed;
         this.status = status;
     }
+    
+    public Borrowed() {
+        
+    }
 
     public User getUser() {
         return user;

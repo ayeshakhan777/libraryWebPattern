@@ -14,8 +14,14 @@ import java.util.ArrayList;
  * @author Sean
  */
 public interface TitleDAOInterface {
-
-    public ArrayList<Title> getTitlesByUserID(int userID);
-
-    public User getUserByOrderID(int userID);
+    
+    public ArrayList<Title> getTitlesByDescription(String description);
+    
+    public ArrayList<Title> getTitlesByAuthor(String description);
+    
+    public ArrayList<Title> getTitlesByName(String name);
+    
+    public Title getTitleByID(int id);
+    
+    public boolean addTitle(Title title);
 }

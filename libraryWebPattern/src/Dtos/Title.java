@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Sean
  */
 public class Title {
+
     private int titleID;
     private String novelName;
     private String author;
@@ -19,7 +20,7 @@ public class Title {
     private int onLoan;
     private String titleDescription;
 
-    public Title(int titleID,String novelName, String author, int stock, int onLoan, String titleDescription) {
+    public Title(int titleID, String novelName, String author, int stock, int onLoan, String titleDescription) {
         this.titleID = titleID;
         this.novelName = novelName;
         this.author = author;
@@ -27,6 +28,7 @@ public class Title {
         this.onLoan = onLoan;
         this.titleDescription = titleDescription;
     }
+
     public Title(String novelName, String author, int stock, int onLoan, String titleDescription) {
         this.novelName = novelName;
         this.author = author;
@@ -34,13 +36,17 @@ public class Title {
         this.onLoan = onLoan;
         this.titleDescription = titleDescription;
     }
-    
+
     public Title() {
-        
+
     }
 
     public int getTitleID() {
         return titleID;
+    }
+
+    public void setTitleID(int titleID) {
+        this.titleID = titleID;
     }
 
     public String getNovelName() {
@@ -112,12 +118,9 @@ public class Title {
         return true;
     }
 
-    
-    
     @Override
     public String toString() {
         return "Title{" + "novelName=" + novelName + ", author=" + author + ", stock=" + stock + ", onLoan=" + onLoan + ", titleDescription=" + titleDescription + '}';
     }
-    
-    
+
 }
