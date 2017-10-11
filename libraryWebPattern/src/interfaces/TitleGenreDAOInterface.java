@@ -5,7 +5,7 @@
  */
 package interfaces;
 
-import Dtos.Genre;
+import Dtos.TitleGenre;
 import java.util.ArrayList;
 
 /**
@@ -14,5 +14,5 @@ import java.util.ArrayList;
  */
 public interface TitleGenreDAOInterface {
 
-    public ArrayList<Genre> getGenreByTitleID(int titleID);
+    public ArrayList<TitleGenre> getGenreByTitleID(int titleID);
 }

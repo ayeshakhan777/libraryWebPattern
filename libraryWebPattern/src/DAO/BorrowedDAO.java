@@ -170,14 +170,14 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
             }
         }
 
-        return borrowedList;    }
+        return borrowedList;    
+    }
 
     @Override
     public boolean addBorrowed(Borrowed borrowed) {
         Connection con = null;
         PreparedStatement ps = null;
         int rs = 0;
-        Borrowed tempBorrowed = null;
         Boolean result = null;
 
         try {
@@ -189,7 +189,11 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
             int daysBorrowed = borrowed.getDaysBorrowed();
             int status = borrowed.getStatus();
 
-
+            ps.setInt(1,userID);
+            ps.setInt(2,titleID);
+            ps.setInt(3,daysBorrowed);
+            ps.setInt(4,status);
+            
             // Execute the query
             rs = ps.executeUpdate();
 
