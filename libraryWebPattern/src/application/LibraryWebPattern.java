@@ -5,6 +5,9 @@
  */
 package application;
 
+import DAO.UserDAO;
+import Dtos.User;
+
 /**
  *
  * @author Sean
@@ -15,7 +18,7 @@ public class LibraryWebPattern {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
     }
     
 }

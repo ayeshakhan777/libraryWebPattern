@@ -191,7 +191,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
         try {
             con = getConnection();
-            String query = "INSERT INTO users VALUES(NULL,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO users VALUES(NULL,?,?,?,?,?,?,?,?,NULL)";
             ps = con.prepareStatement(query);
             String email = user.getEmail();
             String password = user.getPassword();
