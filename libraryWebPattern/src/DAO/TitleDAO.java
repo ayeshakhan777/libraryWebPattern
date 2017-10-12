@@ -214,7 +214,7 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
     } 
 
     @Override
-    public boolean addTitle(Title title) {
+    public boolean addTitle(Title title, User admin) {
         Connection con = null;
         PreparedStatement ps = null;
         int rs = 0;

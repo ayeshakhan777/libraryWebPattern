@@ -12,6 +12,7 @@ import Dtos.Genre;
  * @author Sean
  */
 public interface GenreDAOInterface {
-
+    //This will return a Genre object by their ID.
+    //Single Genre object.
     public Genre getGenreByID(int genreID);
 }

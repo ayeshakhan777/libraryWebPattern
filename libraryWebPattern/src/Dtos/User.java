@@ -10,16 +10,20 @@ package Dtos;
  * @author Sean
  */
 public class User {
-    private int userID;
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String country;
-    private String addressLine1;
-    private String addressLine2;
-    private int isAdmin;
+    private int userID; //ID of user in database, auto assigned when added.
+    private String email; //Email of user, used for logging in, acting as username.
+    private String password; //Password of user, used to ensure user info is secure.
+    private String firstName; //First name of user, used to recording data of user to display.
+    private String lastName; //Last name of user, used to recording data of user to display.
+    private String country; //Country of user, used to recording data of user to display.
+                            //Can also be used to localise language if needed.
+    private String addressLine1; //Address of user, used incase letter/info needs to be sent.
+    private String addressLine2; //Address of user, used incase letter/info needs to be sent.
+    private int isAdmin; //Check is user is an admin. 1 will mean yes, 0 will mean no.
     
+    //This Constructor will be user for general usage.
+    //When creating an object outside of adding a user, use this constructor.
+    //Only tablerow not saved is userJoined row.
     public User(int userID, String email, String password, String firstName, String lastName, String country, String addressLine1, String addressLine2, int isAdmin) {
         this.userID = userID;
         this.email = email;
@@ -32,6 +36,9 @@ public class User {
         this.isAdmin = isAdmin;
     }
     
+    //This constructor will be user for adding a user to the database.
+    //Needed because user doesnt recieve userID until they are added.
+    //Table rows not saved/created: userID,userJoined.
     public User(String email, String password, String firstName, String lastName, String country, String addressLine1, String addressLine2, int isAdmin) {
         this.email = email;
         this.password = password;
@@ -45,11 +52,15 @@ public class User {
     
     
     
-    
+    //Default constructor
+    //No info entered.
     public User() {
         
     }
 
+    
+    //Getter and Setters for each variable.
+    //Normally wouldnt have a setter for userID but needed when creating new user objects from pulled database info.
     public int getUserID() {
         return userID;
     }
@@ -123,6 +134,9 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    
+    //toString of all user Data
+    //Based on constructor without ID to ensure no errors when printing various objects.
     @Override
     public String toString() {
         return "User{" + "email=" + email + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", country=" + country + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", isAdmin=" + isAdmin + '}';

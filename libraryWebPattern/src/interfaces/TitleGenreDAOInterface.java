@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Sean
  */
 public interface TitleGenreDAOInterface {
-
+    //This will return a list of TitleGenre objects by the titleID.
+    //TitleGenre objects store Title and Genre objects.
     public ArrayList<TitleGenre> getGenreByTitleID(int titleID);
 }
