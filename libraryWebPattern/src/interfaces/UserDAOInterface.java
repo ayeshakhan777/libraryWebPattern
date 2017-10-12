@@ -20,5 +20,5 @@ public interface UserDAOInterface {
 
     public User findUserByID(int userID);
 
-    public boolean addUser(User user);
+    public boolean addUser(User user, User admin);
 }

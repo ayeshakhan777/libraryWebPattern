@@ -182,7 +182,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(User user, User admin) {
         Connection con = null;
         PreparedStatement ps = null;
         int rs = 0;
