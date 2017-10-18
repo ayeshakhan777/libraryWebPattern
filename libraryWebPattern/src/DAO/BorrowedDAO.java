@@ -27,7 +27,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Borrowed borrowed = null;
-        UserDAO1 userdao = new UserDAO1();
+        UserDAO userdao = new UserDAO();
         TitleDAO titledao = new TitleDAO();
         ArrayList<Borrowed> borrowedList = new ArrayList();
 
@@ -78,7 +78,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Borrowed borrowed = null;
-        UserDAO1 userdao = new UserDAO1();
+        UserDAO userdao = new UserDAO();
         TitleDAO titledao = new TitleDAO();
         ArrayList<Borrowed> borrowedList = new ArrayList();
 
@@ -129,7 +129,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Borrowed borrowed = null;
-        UserDAO1 userdao = new UserDAO1();
+        UserDAO userdao = new UserDAO();
         TitleDAO titledao = new TitleDAO();
         ArrayList<Borrowed> borrowedList = new ArrayList();
 
