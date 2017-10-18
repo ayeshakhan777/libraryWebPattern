@@ -253,5 +253,58 @@ public class UserDAO extends DAO implements UserDAOInterface {
         return result;
 
     }
-    
+
+    @Override
+    public int login(String email, String password) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int result = 0;
+        if (email != null || password != null) {
+            try {
+                con = getConnection();
+                String query = "SELECT * FROM users WHERE email = ?";
+                ps = con.prepareStatement(query);
+
+                ps.setString(1, email);
+                rs = ps.executeQuery();
+                System.out.println();
+
+                if (rs != null) {
+                    while (rs.next()) {
+                        if (rs.getString("password").equals(password)) {
+                            result = rs.getInt("userID");
+                        } else {
+                            System.out.println("Password was incorrect");
+                        }
+                    }
+                } else {
+                    System.out.println("No user with email was found.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the login() method");
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (ps != null) {
+                        ps.close();
+                    }
+                    if (con != null) {
+                        closeConnection(con);
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Exception occured in the finally section in the login() method");
+                }
+            }
+        } else {
+            System.out.println("User email or password was left blank, please reenter informatation");
+        }
+
+        return result;
+    }
+
 }

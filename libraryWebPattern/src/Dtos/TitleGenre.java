@@ -1,27 +1,36 @@
 package Dtos;
 
 /**
- *
+ * Title genre is used to link Titles to genres.
+ * This is done by creating 2 objects: Title and Genre.
+ * These are stored as ID's in database but creating them as objects in application will allow for more control/freedom.
  * @author Sean
  */
-//Title genre is used to link Titles to genres.
-//This is done by creating 2 objects: Title and Genre.
-//These are stored as ID's in database but creating them as objects in application will allow for more control/freedom.
 
 public class TitleGenre {
-    private Genre genre; //What type of title the book is.
-                         //Used to find books suited to users interest.
-    private Title title; //Title object, Used to identify what title the genre is identifying.
-    
-    //Constructor for TitleGenre
-    //Title and Genre object are created by method when pulling from DB.
+
+    private Genre genre;
+  
+    private Title title; 
+
+
+    /**
+     * Constructor for TitleGenre
+     * Title and Genre object are created by method when pulling from DB.
+     *
+     * @param title What type of title the book is. Used to find books suited to users interest.
+     * @param genre Title object, Used to identify what title the genre is identifying.
+     */
     public TitleGenre(Title title, Genre genre) {
         this.title = title;
         this.genre = genre;
     }
 
-    //Default Constructor
-    //No info
+
+    /**
+     * Default Constructor
+     * No info/params needed.
+     */
     public TitleGenre() {
     }
 
@@ -48,5 +57,5 @@ public class TitleGenre {
     public String toString() {
         return "TitleGenre{" + "genre=" + genre + ", title=" + title + '}';
     }
-    
+
 }

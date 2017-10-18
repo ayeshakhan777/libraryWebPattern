@@ -5,6 +5,7 @@
  */
 package application;
 
+import DAO.UserDAO;
 import Dtos.User;
 import java.util.Scanner;
 
@@ -19,7 +20,6 @@ public class LibraryWebPattern {
      */
     public static void main(String[] args) {
         User user = new User();
-        System.out.println(user.getUserID());
         Scanner input = new Scanner(System.in);
         int choice = -1;
 
@@ -30,12 +30,22 @@ public class LibraryWebPattern {
             switch (choice) {
 
                 case 1:
+                    UserDAO login = new UserDAO();
                     System.out.println("Please enter your email:");
                     String email = input.nextLine();
                     
                     System.out.println("Please enter your password:");
                     String password = input.nextLine();
                     
+                    int userID = login.login(email, password);
+                    
+                    if(userID != 0) {
+                        System.out.println("Login successful!");
+                        user = login.findUserByID(userID);
+                        System.out.println("Welcome " + user.getFirstName() + "!");
+                    } else {
+                        System.out.println("Please try again");
+                    }
                     
                     break;
             }

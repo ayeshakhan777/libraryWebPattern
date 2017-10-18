@@ -13,20 +13,51 @@ import java.util.ArrayList;
  * @author Sean
  */
 public interface UserDAOInterface {
-    //This will allow the user to call users by their first name and last name
-    //Both variables must be exactly right, Case sensitive
+
+    /**
+     * This will allow the user to call users by their first name and last name
+     * Both variables must be exactly right, Case sensitive
+     * @param firstName Parameter for finding user.
+     * @param lastName Parameter for finding user.
+     * @return ArrayList of relevant User objects.
+     */
     public ArrayList<User> selectUserByUsername(String firstName, String lastName);
 
-    //This will allow the user to call users by their name
-    //This will check first and last name, if the substring is inside.
-    //Case sensitive.
+
+    /**
+     * This will allow the user to call users by their name<p>
+     * This will check first and last name, if the substring is inside.<p>
+     * Case sensitive.
+     * @param name Used to find if user first or last name contain substring.
+     * @return ArrayList of relevant User objects.
+     */
     public ArrayList<User> selectUserContainingName(String name);
 
-    //This will call a user by their ID
+  
+    /**
+     * This will call a user by their ID<p>
+     * This will allow for specific Users to be pulled or for other methods to utilize if needed.<p>
+     * @param userID ID of user.
+     * @return User object of user with matching user.
+     */
     public User findUserByID(int userID);
 
-    //This will add a user into the system
-    //Admin user is imported to check if they are a admin before adding user
-    //Method rejected if admin object isn't admin.
+    /**
+     * This will add a user into the system<p>
+     * Admin user is imported to check if they are a admin before adding user<p>
+     * Method rejected if admin object isn't admin.
+     * @param user User object that is being added to database.
+     * @param admin User object to confirm add method is being used by a admin.
+     * @return
+     */
     public boolean addUser(User user, User admin);
+    
+    /**
+     * This allows the user to login to the system with their email and password.
+     * Email and Password are case sensitive.
+     * @param email Used to identify who is logging in.
+     * @param password Used to confirm client is this user.
+     * @return boolean result to if it was successful.
+     */
+    public int login(String email, String password);
 }

@@ -20,6 +20,18 @@ public class Title {
     private int onLoan;
     private String titleDescription;
 
+    /**
+     * Used to create title objects pulled from the database.<p>
+     * Main constructor<p>
+     * This is used to allow for easier controller of data when called from db.
+     * 
+     * @param titleID This is used to identify a title in the database. Primary key.
+     * @param novelName This is the Titles name, Mainly used for user to find title.
+     * @param author This is used to identify who created the Title. Allows for users to also find other titles made by author.
+     * @param stock This is used to keep track of how many titles are currently stocked
+     * @param onLoan This is used to keep track of how many books are currently out on loan to users.
+     * @param titleDescription This is used to keep a small description of what the title is about.
+     */
     public Title(int titleID, String novelName, String author, int stock, int onLoan, String titleDescription) {
         this.titleID = titleID;
         this.novelName = novelName;
@@ -28,6 +40,19 @@ public class Title {
         this.onLoan = onLoan;
         this.titleDescription = titleDescription;
     }
+    
+        /**
+     * Used to create title objects pulled from the database.<p>
+     * This is used to create objects not in database, as they do not contain a titleID which is given when being added to database.<p>
+     * Only use when creating a title object that isn't currently in the database.<p>
+     * This is used to allow for easier controller of data when called from db.
+     * 
+     * @param novelName This is the Titles name, Mainly used for user to find title.
+     * @param author This is used to identify who created the Title. Allows for users to also find other titles made by author.
+     * @param stock This is used to keep track of how many titles are currently stocked
+     * @param onLoan This is used to keep track of how many books are currently out on loan to users.
+     * @param titleDescription This is used to keep a small description of what the title is about.
+     */
 
     public Title(String novelName, String author, int stock, int onLoan, String titleDescription) {
         this.novelName = novelName;
@@ -37,6 +62,10 @@ public class Title {
         this.titleDescription = titleDescription;
     }
 
+    /**
+     * Default Constructor
+     * No info/params.
+     */
     public Title() {
 
     }
