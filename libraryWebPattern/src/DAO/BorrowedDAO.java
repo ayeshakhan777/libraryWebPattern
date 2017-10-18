@@ -6,6 +6,7 @@
 package DAO;
 
 import Dtos.Borrowed;
+import Dtos.User;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import interfaces.BorrowedDAOInterface;
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Borrowed borrowed = null;
-        UserDAO userdao = new UserDAO();
+        UserDAO1 userdao = new UserDAO1();
         TitleDAO titledao = new TitleDAO();
         ArrayList<Borrowed> borrowedList = new ArrayList();
 
@@ -77,7 +78,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Borrowed borrowed = null;
-        UserDAO userdao = new UserDAO();
+        UserDAO1 userdao = new UserDAO1();
         TitleDAO titledao = new TitleDAO();
         ArrayList<Borrowed> borrowedList = new ArrayList();
 
@@ -128,7 +129,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Borrowed borrowed = null;
-        UserDAO userdao = new UserDAO();
+        UserDAO1 userdao = new UserDAO1();
         TitleDAO titledao = new TitleDAO();
         ArrayList<Borrowed> borrowedList = new ArrayList();
 
@@ -174,7 +175,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
     }
 
     @Override
-    public boolean addBorrowed(Borrowed borrowed) {
+    public boolean addBorrowed(Borrowed borrowed, User admin) {
         Connection con = null;
         PreparedStatement ps = null;
         int rs = 0;
