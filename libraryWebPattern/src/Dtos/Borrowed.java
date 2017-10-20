@@ -6,7 +6,9 @@
 package Dtos;
 
 /**
- *
+ * Borrowed object are a combination of user and Title objects.
+ * This allowed a user to be tied to a title.
+ * Relevant data to this link is also stored here, such as how long it has been borrowed and if it was returned.
  * @author Sean
  */
 public class Borrowed {
@@ -15,6 +17,14 @@ public class Borrowed {
     private int daysBorrowed;
     private int status;
 
+    /**
+     * Used to create Borrowed Objects
+     * Borrowed objects allow for ease of access of what title were borrowed and who borrowed it.
+     * @param user Used to store user data of who borrowed a title.
+     * @param title Used to store title data of what title was borrowed.
+     * @param daysBorrowed Used to track how long it was borrowed.
+     * @param status Used to keep a record of if it was returned.
+     */
     public Borrowed(User user, Title title, int daysBorrowed, int status) {
         this.user = user;
         this.title = title;
@@ -22,6 +32,10 @@ public class Borrowed {
         this.status = status;
     }
     
+    /**
+     * Default Constructor.
+     * No info/params needed.
+     */
     public Borrowed() {
         
     }

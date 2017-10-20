@@ -186,10 +186,9 @@ public class UserDAO extends DAO implements UserDAOInterface {
      *This method will take input from the console and create a user object. The user must 
      * be an admin to use this method.
      * @param user
-     * @param admin
      * @return boolean indicating if the add was executed or not.
      */
-    public boolean addUser(User user, User admin) {
+    public boolean addUser(User user) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rs = 0;
@@ -241,6 +240,111 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
         return result;
 
+    }
+    
+    @Override
+    public int login(String email, String password) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int result = 0;
+        if (email != null || password != null) {
+            try {
+                con = getConnection();
+                String query = "SELECT * FROM users WHERE email = ?";
+                ps = con.prepareStatement(query);
+
+                ps.setString(1, email);
+                rs = ps.executeQuery();
+
+                if (rs != null) {
+                    while (rs.next()) {
+                        if (rs.getString("password").equals(password)) {
+                            result = rs.getInt("userID");
+                        } else {
+                            System.out.println("Password was incorrect");
+                        }
+                    }
+                } else {
+                    System.out.println("No user with email was found.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the login() method");
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (ps != null) {
+                        ps.close();
+                    }
+                    if (con != null) {
+                        closeConnection(con);
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Exception occured in the finally section in the login() method");
+                }
+            }
+        } else {
+            System.out.println("User email or password was left blank, please reenter informatation");
+        }
+
+        return result;
+    }
+
+
+    @Override
+    public User getUserByEmail(String email) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = getConnection();
+            String query = "SELECT * FROM users WHERE email = ?";
+            ps = con.prepareStatement(query);
+
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                user = new User();
+                // Get the pieces of a customer from the resultset
+                user.setUserID(rs.getInt("userID"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setCountry(rs.getString("country"));
+                user.setAddressLine1(rs.getString("addressLine1"));
+                user.setAddressLine2(rs.getString("addressLine2"));
+                user.setIsAdmin(rs.getInt("isAdmin"));
+            }
+            
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getUserByEmail() method");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    closeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section in the getUserByEmail() method");
+            }
+        }
+
+        return user;
     }
 
 }
