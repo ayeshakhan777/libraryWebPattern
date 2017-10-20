@@ -14,27 +14,57 @@ import java.util.ArrayList;
  * @author Sean
  */
 public interface TitleDAOInterface {
-    //This will return an Arraylist of Titles by their description.
-    //Method will check for substring inside titleDescription row.
-    //Case Sensitive
+
+    /**
+     * This will return an ArrayList of Titles by their description.<p>
+     * Method will check for substring inside titleDescription row.<p>
+     * Case Sensitive
+     * @param description This will allow for title to be found based on user input.
+     * @return ArrayList of relevant Titles.
+     */
     public ArrayList<Title> getTitlesByDescription(String description);
     
-    //THis will return an ArrayList of Titles by their Author.
-    //Method will check for eact name, not substring.
-    //Case Sensitive.
+
+    /**
+     * This will return an ArrayList of Titles by their Author.<p>
+     * Method will check for exact name, not substring.<p>
+     * Case Sensitive.
+     * @param description This will allow for title to be found based on user input.
+     * @return ArrayList of relevant Titles.
+     */
     public ArrayList<Title> getTitlesByAuthor(String description);
-    
-    //This will return Substring of Titles by their name.
-    //This will check for exact name, not substring.
-    //Case Sensitive.
+
+
+    /**
+     * This will return Substring of Titles by their name.<p>
+     * This will check for exact name, not substring.<p>
+     * Case Sensitive.
+     * @param name This will allow for user to find title by Author
+     * @return ArrayList of relevant Titles.
+     */
     public ArrayList<Title> getTitlesByName(String name);
     
-    //This will return a title by their id.
-    //Single Title.
+
+    /**
+     * This will return a title from the Database based on id.
+     * This will allow for specific title to be pulled or for other methods to utilize if needed.
+     * @param id
+     * @return Title object based on ID.
+     */
     public Title getTitleByID(int id);
     
-    //This will add a title into the database.
-    //This must be done by a admin User.
-    //Method will be rejected if they are not.
-    public boolean addTitle(Title title, User admin);
+
+    /**
+     * This will add a title into the database.
+     * @param title used to be added to database.
+     * @return Confirmation if add was successful.
+     */
+    public boolean addTitle(Title title);
+    
+    /**
+     * Used to return all titles in database.
+     * Can be used to display or to find info from client.
+     * @return ArrayList of all titles in db.
+     */
+    public ArrayList<Title> getAllTitles();
 }

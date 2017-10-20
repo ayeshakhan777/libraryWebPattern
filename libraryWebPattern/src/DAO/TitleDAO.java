@@ -6,7 +6,6 @@
 package DAO;
 
 import Dtos.Title;
-import Dtos.User;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import interfaces.TitleDAOInterface;
 import java.sql.Connection;
@@ -116,7 +115,7 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
             }
         }
 
-        return titles;    
+        return titles;
     }
 
     @Override
@@ -165,7 +164,7 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
             }
         }
 
-        return titles;    
+        return titles;
     }
 
     @Override
@@ -210,11 +209,11 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
             }
         }
 
-        return title;    
-    } 
+        return title;
+    }
 
     @Override
-    public boolean addTitle(Title title, User admin) {
+    public boolean addTitle(Title title) {
         Connection con = null;
         PreparedStatement ps = null;
         int rs = 0;
@@ -278,5 +277,52 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
 
         return result;
     }
-    
+
+    @Override
+    public ArrayList<Title> getAllTitles() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Title title = null;
+        ArrayList<Title> titles = new ArrayList();
+
+        try {
+            con = getConnection();
+            String query = "SELECT * FROM titles ";
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                title = new Title();
+                title.setTitleID(rs.getInt("titleID"));
+                title.setNovelName(rs.getString("novelName"));
+                title.setAuthor(rs.getString("author"));
+                title.setStock(rs.getInt("stock"));
+                title.setOnLoan(rs.getInt("onLoan"));
+                title.setTitleDescription(rs.getString("titleDescription"));
+                titles.add(title);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getTitlesByName() method");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    closeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section in the getTitlesByName() method");
+            }
+        }
+
+        return titles;
+
+    }
 }
