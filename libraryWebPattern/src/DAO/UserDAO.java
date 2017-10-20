@@ -182,7 +182,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
     }
 
     @Override
-    public boolean addUser(User user, User admin) {
+    public boolean addUser(User user) {
         Connection con = null;
         PreparedStatement ps = null;
         int rs = 0;
@@ -226,12 +226,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
         } catch (Exception e) {
             System.out.println("Exception occurred: " + e.getMessage());
             e.printStackTrace();
-        } // Now that the program has completed its database access component, 
-        // close the open access points (resultset, preparedstatement, connection)
-        // Remember to close them in the OPPOSITE ORDER to how they were opened
-        // Opening order: Connection -> PreparedStatement -> ResultSet
-        // Closing order: ResultSet -> PreparedStatement -> Connection
-        finally {
+        } finally {
             try {
                 if (ps != null) {
                     ps.close();
@@ -268,7 +263,6 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
                 ps.setString(1, email);
                 rs = ps.executeQuery();
-                System.out.println();
 
                 if (rs != null) {
                     while (rs.next()) {
@@ -305,6 +299,59 @@ public class UserDAO extends DAO implements UserDAOInterface {
         }
 
         return result;
+    }
+
+
+    @Override
+    public User getUserByEmail(String email) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = getConnection();
+            String query = "SELECT * FROM users WHERE email = ?";
+            ps = con.prepareStatement(query);
+
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                user = new User();
+                // Get the pieces of a customer from the resultset
+                user.setUserID(rs.getInt("userID"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setCountry(rs.getString("country"));
+                user.setAddressLine1(rs.getString("addressLine1"));
+                user.setAddressLine2(rs.getString("addressLine2"));
+                user.setIsAdmin(rs.getInt("isAdmin"));
+            }
+            
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getUserByEmail() method");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    closeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section in the getUserByEmail() method");
+            }
+        }
+
+        return user;
     }
 
 }

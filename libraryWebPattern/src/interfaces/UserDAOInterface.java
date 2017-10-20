@@ -47,17 +47,25 @@ public interface UserDAOInterface {
      * Admin user is imported to check if they are a admin before adding user<p>
      * Method rejected if admin object isn't admin.
      * @param user User object that is being added to database.
-     * @param admin User object to confirm add method is being used by a admin.
      * @return
      */
-    public boolean addUser(User user, User admin);
+    public boolean addUser(User user);
     
     /**
-     * This allows the user to login to the system with their email and password.
+     * This will allow for a lookup of user in database.
+     * Only using single user object as email needs to be unique.
+     * @param email Used to find user in database
+     * @return User object with info if found.
+     */
+    public User getUserByEmail(String email);
+    
+    /**
+     * This allows the user to login to the system with their email and password.<p>
      * Email and Password are case sensitive.
      * @param email Used to identify who is logging in.
      * @param password Used to confirm client is this user.
      * @return boolean result to if it was successful.
      */
     public int login(String email, String password);
+    
 }

@@ -63,4 +63,11 @@ public interface TitleDAOInterface {
      * @return Confirmation if add was successful.
      */
     public boolean addTitle(Title title, User admin);
+    
+    /**
+     * Used to return all titles in database.
+     * Can be used to display or to find info from client.
+     * @return ArrayList of all titles in db.
+     */
+    public ArrayList<Title> getAllTitles();
 }
