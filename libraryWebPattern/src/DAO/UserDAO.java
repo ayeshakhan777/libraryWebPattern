@@ -26,8 +26,8 @@ public class UserDAO extends DAO implements UserDAOInterface {
      * This will allow the user to call users by their first name and last name
      * Both variables must be exactly right, Case sensitive
      *
-     * @param firstName
-     * @param lastName
+     * @param firstName parameter is used to find the user in the db.
+     * @param lastName parameter is used to find the user in the db.
      * @return ArrayList with users from the db matching the first and last name
      * parameters
      */
@@ -85,7 +85,8 @@ public class UserDAO extends DAO implements UserDAOInterface {
      * This will allow the user to call users by their name. This will check
      * first and last name, if the substring is inside. Case sensitive.
      *
-     * @param name
+     * @param name used to find a user if the first name or last name contains
+     * this String
      * @return ArrayList with users from the database with a name containing the
      * name parameter
      */
@@ -142,8 +143,9 @@ public class UserDAO extends DAO implements UserDAOInterface {
      * This will check the database for a user with userID of the param and
      * return the user
      *
-     * @param userID
-     * @return User
+     * @param userID This Parameter is used to find a user with an id equal to
+     * this parameter
+     * @return User object which matches the ID of the param
      */
     public User findUserByID(int userID) {
         Connection conn = null;
@@ -183,16 +185,16 @@ public class UserDAO extends DAO implements UserDAOInterface {
     }
 
     /**
-     *This method will take input from the console and create a user object. The user must 
-     * be an admin to use this method.
+     * This method will take input from the console and create a user object.
+     * The user must be an admin to use this method.
+     *
      * @param user
      * @return boolean indicating if the add was executed or not.
      */
-    public boolean addUser(User user) {
+    public boolean addUser(User u) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rs = 0;
-        User u = null;
         Boolean result = null;
 
         try {
@@ -241,7 +243,15 @@ public class UserDAO extends DAO implements UserDAOInterface {
         return result;
 
     }
-    
+
+    /**
+     * This allows the user to login to the system with their email and
+     * password. Email and Password are case sensitive.
+     *
+     * @param email Used to identify who is logging in.
+     * @param password Used to confirm client is this user.
+     * @return boolean result to if it was successful.
+     */
     @Override
     public int login(String email, String password) {
         Connection con = null;
@@ -294,7 +304,13 @@ public class UserDAO extends DAO implements UserDAOInterface {
         return result;
     }
 
-
+    /**
+     * This will allow for a lookup of user in database. Only using single user
+     * object as email needs to be unique.
+     *
+     * @param email Used to find user in database
+     * @return User object with info if found.
+     */
     @Override
     public User getUserByEmail(String email) {
         Connection con = null;
@@ -323,7 +339,6 @@ public class UserDAO extends DAO implements UserDAOInterface {
                 user.setAddressLine2(rs.getString("addressLine2"));
                 user.setIsAdmin(rs.getInt("isAdmin"));
             }
-            
 
         } catch (SQLException e) {
             System.out.println("Exception occured in the getUserByEmail() method");

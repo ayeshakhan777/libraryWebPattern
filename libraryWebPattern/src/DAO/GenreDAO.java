@@ -15,35 +15,39 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Seanoh
+ * @author Sami
  */
 public class GenreDAO extends DAO implements GenreDAOInterface {
 
+    /**
+     *
+     * This will check the db for a Genre based on GenreID and return that Genre
+     *
+     * @param genreID This will be used to find a Genre with an id equal to
+     * genreID param
+     * @return Genre object from the db which matches the genreID of the param.
+     */
     @Override
     public Genre getGenreByID(int genreID) {
-        Connection con = null;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Genre genre = new Genre();
-        ArrayList<Genre> Genre = new ArrayList();
+        Genre g = new Genre();
 
         try {
-            con = getConnection();
+            conn = getConnection();
             String query = "SELECT * FROM genre WHERE genreID = ?";
-            ps = con.prepareStatement(query);
+            ps = conn.prepareStatement(query);
 
             ps.setInt(1, genreID);
             rs = ps.executeQuery();
 
-            while (rs.next()) {
-                genre.setGenreID(rs.getInt("genreID"));
-                genre.setGenre(rs.getString("genre"));
-
+            if (rs.next()) {
+                g = new Genre(rs.getInt("genreID"), rs.getString("genre"));
             }
 
         } catch (SQLException e) {
-            System.out.println("Exception occured in the GenreDAO() method");
-            e.printStackTrace();
+            System.out.println("Exception occured in the getGenreByID() method: " + e.getMessage());
         } finally {
             try {
                 if (rs != null) {
@@ -52,15 +56,14 @@ public class GenreDAO extends DAO implements GenreDAOInterface {
                 if (ps != null) {
                     ps.close();
                 }
-                if (con != null) {
-                    closeConnection(con);
+                if (conn != null) {
+                    closeConnection(conn);
                 }
             } catch (SQLException e) {
-                System.out.println("Exception occured in the finally section in the GenreDAO() method");
+                System.out.println("Exception occured in the finally section of the getGenreByID() method: " + e.getMessage());
             }
         }
-
-        return genre;
+        return g;
     }
-    
+
 }
